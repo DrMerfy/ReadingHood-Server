@@ -1,0 +1,6 @@
+com\readinghood\model\Role.class
+com\readinghood\repository\RoleRepository.class
+com\readinghood\model\User.class
+com\readinghood\repository\UserRepository.class
+com\readinghood\MainApplication.class
+com\readinghood\web\UserController.class
