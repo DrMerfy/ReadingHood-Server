@@ -5,7 +5,7 @@
  */
 package com.readinghood.repository;
 
-import com.readinghood.model.Role;
+import com.readinghood.entity.Role;
 import org.springframework.data.repository.CrudRepository;
 
 /**

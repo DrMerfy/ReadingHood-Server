@@ -1,6 +1,12 @@
-com\readinghood\model\Role.class
-com\readinghood\repository\RoleRepository.class
-com\readinghood\model\User.class
-com\readinghood\repository\UserRepository.class
+com\readinghood\entity\Account.class
+com\readinghood\WebSecurityConfig.class
+com\readinghood\WebSecurityConfiguration$1.class
+com\readinghood\web\MainController.class
+com\readinghood\repository\AccountRepository.class
+com\readinghood\MainApplication$1.class
 com\readinghood\MainApplication.class
-com\readinghood\web\UserController.class
+com\readinghood\WebSecurityConfiguration.class
+com\readinghood\repository\RoleRepository.class
+com\readinghood\entity\Role.class
+com\readinghood\WebSecurityConfiguration$2.class
+com\readinghood\web\AccountController.class

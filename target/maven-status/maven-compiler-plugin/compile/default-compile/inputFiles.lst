@@ -1,6 +1,7 @@
-C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\web\UserController.java
+C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\entity\Role.java
 C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\MainApplication.java
-C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\model\Role.java
 C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\repository\RoleRepository.java
-C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\repository\UserRepository.java
-C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\model\User.java
+C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\entity\Account.java
+C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\web\MainController.java
+C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\repository\AccountRepository.java
+C:\Users\User\Documents\NetBeansProjects\MainApplication\src\main\java\com\readinghood\web\AccountController.java
