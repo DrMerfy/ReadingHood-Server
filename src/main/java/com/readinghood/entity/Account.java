@@ -6,7 +6,6 @@
 package com.readinghood.entity;
 import javax.persistence.*;
 import java.util.Set;
-import com.readinghood.entity.Role;
 
 @Entity
 @Table(name = "account")

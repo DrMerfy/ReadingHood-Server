@@ -14,6 +14,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
                     
+    @Override
     List<Account> findAll();
     List<Account> findAccountByName(String name);
     Account findAccountByEmail(String email);
