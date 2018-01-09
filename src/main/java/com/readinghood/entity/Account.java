@@ -4,85 +4,103 @@
  * and open the template in the editor.
  */
 package com.readinghood.entity;
-import javax.persistence.*;
-import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Table(name = "account")
+@Table(name = "account", indexes = { @Index(columnList = "account_id"), @Index(columnList = "account_name"), @Index(columnList = "account_email") })
 public class Account {
-    private Long id;
-    private String email;
-    private String password;
-    private String username;
-    private String name;
-    private String surname;
-    private Set<Role> roles;
 
-    
-    public Account(String email, String password){
-        this.email = email;
-        this.password = password;
-    }
-    
-    public Account(){}
-    
     @Id
+    @Column(name = "account_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "account_email")
+    @Email
+    @NotNull
+    private String email;
+
+    @Column(name = "account_username")
+    @NotNull
+    private String username;
+
+    @Column(name = "account_password")
+    @NotNull
+    private String password;
+
+    @Column(name = "account_role")
+    @NotNull
+    @ColumnDefault(value = Role.Values.USER)
+    private Role accountRole;
+
+    @OneToOne(optional = false, targetEntity = Profile.class)
+    private Profile profile;
+
+    public Account(String email, String password) {
+	this.email = email;
+	this.password = password;
+    }
+
+    public Account() {
+    }
+
     public Long getId() {
-        return id;
+	return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname=surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+	this.id = id;
     }
 
     public String getEmail() {
-        return email;
+	return email;
     }
-    
+
+    public void setEmail(String email) {
+	this.email = email;
+    }
+
+    public String getUsername() {
+	return username;
+    }
+
+    public void setUsername(String username) {
+	this.username = username;
+    }
+
+    public String getPassword() {
+	return password;
+    }
+
     public void setPassword(String password) {
-        this.password = password;
+	this.password = password;
     }
 
-    @ManyToMany
-    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> getRoles() {
-        return roles;
+    public Profile getProfile() {
+	return profile;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setProfile(Profile profile) {
+	this.profile = profile;
+    }
+
+    public Role getAccountRole() {
+	return accountRole;
+    }
+
+    public void setAccountRole(Role accountRole) {
+	this.accountRole = accountRole;
     }
 }
