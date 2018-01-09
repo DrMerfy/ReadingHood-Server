@@ -1,0 +1,42 @@
+// New, incubating gradle plugin declarations
+plugins {
+  id 'java'
+  id 'eclipse'
+  id 'application'
+  id 'org.springframework.boot' version '1.5.9.RELEASE'
+  id 'org.mikeneck.junit.starter.normal' version '5.0.2'
+}
+
+jar {
+    baseName = 'alhareborn'
+    version =  '0.0.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.hibernate:hibernate-core')
+
+    compile('mysql:mysql-connector-java:8.0.8-dmr')
+    compile('org.hsqldb:hsqldb:2.4.0')
+    compile('com.h2database:h2:1.4.196')
+        
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.jmockit:jmockit:1.21')
+    testCompile files('libs/junit-tools.jar')
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3.1'
+}

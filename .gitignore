@@ -1,3 +1,24 @@
 /Usage/TestClient/build/
 /Usage/TestClient/dist/
 /Usage/TestClient/nbproject/private/
+
+
+#Gradle
+.gradletasknamecache
+.gradle/
+build/
+bin/
+
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# generated files
+bin/
+gen/
+
+
+# Java class files
+*.class
