@@ -6,6 +6,7 @@
 package com.readinghood.web;
 
 import com.readinghood.entity.Account;
+import com.readinghood.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,25 +28,31 @@ public class MainController {
     @GetMapping(path = "/register") // Map ONLY GET Requests
     public @ResponseBody
     String addNewUser(
+            @RequestParam String username,
             @RequestParam String email,
             @RequestParam String password,
-            @RequestParam(value = "username", required = false) String username,
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "surname", required = false) String surname,
-            @RequestParam(value = "roles", required = false) String roles) {
+            @RequestParam(value = "role", required = false) String role,
+            @RequestParam(value = "profile", required = false) String name) {
 
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
-        if (accountRepository.findAccountByEmail(email) == null) {
+        if (accountRepository.findByEmail(email) == null) {
 
             String hashedPassword = passwordEncoder.encode(password);
 
             Account n = new Account();
             n.setUsername(username);
-            n.setName(name);
-            n.setSurname(surname);
-            n.setPassword(hashedPassword);
             n.setEmail(email);
+            n.setPassword(hashedPassword);
+            if (role != null) {
+                Role accountRole = Role.newRole(role);
+                if (accountRole == null) {
+                    return "Unsupported account role '" + role + "'";
+                }
+                n.setAccountRole(accountRole);
+            } else {                
+                n.setAccountRole(Role.USER);
+            }
 
             accountRepository.save(n);
 

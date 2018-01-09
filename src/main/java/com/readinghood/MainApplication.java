@@ -71,7 +71,7 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                Account acc = accountRepository.findAccountByEmail(email);
+                Account acc = accountRepository.findByEmail(email);
                 if (acc != null) {
                     //System.out.println(acc.getEmail());
                     return new User(acc.getEmail(), acc.getPassword(), true, true, true, true,

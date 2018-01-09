@@ -3,10 +3,12 @@ com\readinghood\WebSecurityConfig.class
 com\readinghood\WebSecurityConfiguration$1.class
 com\readinghood\web\MainController.class
 com\readinghood\repository\AccountRepository.class
+com\readinghood\repository\ProfileRepository.class
 com\readinghood\MainApplication$1.class
 com\readinghood\MainApplication.class
 com\readinghood\WebSecurityConfiguration.class
-com\readinghood\repository\RoleRepository.class
+com\readinghood\entity\Profile.class
 com\readinghood\entity\Role.class
 com\readinghood\WebSecurityConfiguration$2.class
 com\readinghood\web\AccountController.class
+com\readinghood\entity\Role$Values.class

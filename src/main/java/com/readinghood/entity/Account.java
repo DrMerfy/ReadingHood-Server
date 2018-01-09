@@ -7,6 +7,8 @@ package com.readinghood.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Table(name = "account", indexes = { @Index(columnList = "account_id"), @Index(columnList = "account_name"), @Index(columnList = "account_email") })
+@Table(name = "account", indexes = { @Index(columnList = "account_id"), @Index(columnList = "account_username"), @Index(columnList = "account_email") })
 public class Account {
 
     @Id
@@ -41,13 +43,15 @@ public class Account {
     private String password;
 
     @Column(name = "account_role")
-    @NotNull
-    @ColumnDefault(value = Role.Values.USER)
+    @Enumerated(EnumType.STRING)
+    //@ColumnDefault(value = "'" + Role.Values.USER + "'")
     private Role accountRole;
 
+    /*
     @OneToOne(optional = false, targetEntity = Profile.class)
     private Profile profile;
-
+    */
+    
     public Account(String email, String password) {
 	this.email = email;
 	this.password = password;
@@ -87,7 +91,7 @@ public class Account {
     public void setPassword(String password) {
 	this.password = password;
     }
-
+/*
     public Profile getProfile() {
 	return profile;
     }
@@ -95,6 +99,7 @@ public class Account {
     public void setProfile(Profile profile) {
 	this.profile = profile;
     }
+*/
 
     public Role getAccountRole() {
 	return accountRole;
