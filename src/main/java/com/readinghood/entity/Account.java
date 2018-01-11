@@ -17,7 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
@@ -44,14 +43,12 @@ public class Account {
 
     @Column(name = "account_role")
     @Enumerated(EnumType.STRING)
-    //@ColumnDefault(value = "'" + Role.Values.USER + "'")
+    // @ColumnDefault(value = "'" + Role.Values.USER + "'")
     private Role accountRole;
 
-    /*
     @OneToOne(optional = false, targetEntity = Profile.class)
     private Profile profile;
-    */
-    
+
     public Account(String email, String password) {
 	this.email = email;
 	this.password = password;
@@ -91,15 +88,10 @@ public class Account {
     public void setPassword(String password) {
 	this.password = password;
     }
-/*
-    public Profile getProfile() {
-	return profile;
-    }
-
-    public void setProfile(Profile profile) {
-	this.profile = profile;
-    }
-*/
+    /*
+     * public Profile getProfile() { return profile; } public void setProfile(Profile profile) { this.profile = profile;
+     * }
+     */
 
     public Role getAccountRole() {
 	return accountRole;
