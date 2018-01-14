@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -42,19 +45,23 @@ public class Profile {
     @OneToOne(optional = false)
     private Account account;
 
-    @ManyToMany
+    @OneToMany
     private List<Post> createdPosts;
 
     @ManyToMany
+    @JoinTable(name = "favorites", joinColumns = { @JoinColumn(referencedColumnName = "profile_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "post_id") })
     private List<Post> favoritePosts;
 
     @ManyToMany
+    @JoinTable(name = "upvotes", joinColumns = { @JoinColumn(referencedColumnName = "profile_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "post_id") })
     private List<Post> upvotes;
 
     @ManyToMany
+    @JoinTable(name = "downvotes", joinColumns = { @JoinColumn(referencedColumnName = "profile_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "post_id") })
     private List<Post> downvotes;
 
     @ManyToMany
+    @JoinTable(name = "savedtags", joinColumns = { @JoinColumn(referencedColumnName = "profile_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "tag_id") })
     private List<Tag> savedTags;
 
     public Profile() {
