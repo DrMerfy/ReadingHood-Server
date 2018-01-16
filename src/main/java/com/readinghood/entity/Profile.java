@@ -45,7 +45,7 @@ public class Profile {
     @OneToOne(optional = false)
     private Account account;
 
-    @OneToMany
+    @OneToMany (mappedBy = "post")
     private List<Post> createdPosts;
 
     @ManyToMany
