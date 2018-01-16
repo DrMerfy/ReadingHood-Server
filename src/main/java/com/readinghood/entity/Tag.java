@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name="Tags",indexes = {@Index(columnList = "tag_id"),@Index(columnList = "views"),@Index(columnList = "name")})
+@Table(name="tag",indexes = {@Index(columnList = "tag_id"),@Index(columnList = "tag_views"),@Index(columnList = "tag_name")})
 public class Tag {
 
 //tag_id (PK)
@@ -19,13 +19,13 @@ public class Tag {
 
     @Column(name="tag_views")
     @NotNull
-    private  int views;
+    private int views;
 
-    @Column(name = "tag_id")
+    @Column(name = "tag_name")
     private String name;
 
     @ManyToMany
-    @JoinTable(name="Thread_Post",
+    @JoinTable(name="Thread_Tag",
             joinColumns ={@JoinColumn(name="tag_id")},
             inverseJoinColumns = {@JoinColumn(name="thread_id")})
     List<Thread> threads;

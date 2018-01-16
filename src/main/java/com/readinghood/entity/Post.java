@@ -10,13 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "post", indexes = { @Index(columnList = "post_id"), @Index(columnList = "post_timestamp"), @Index(columnList = "post_text") })
+@Table(name = "post", indexes = { @Index(columnList = "post_id"), @Index(columnList = "post_text") })
 
 public class Post {
 
@@ -32,23 +33,32 @@ public class Post {
     private String text;
 
     @ManyToOne(targetEntity = Profile.class)
-    @JoinColumn (name = "profile_id")
     private Profile author;
+    
+    
+    @ManyToOne(targetEntity = Thread.class)
+    private Thread thread;
 
     
     
-    @ManyToMany (mappedBy = "profile")
+    @ManyToMany
+    @JoinTable(name = "favorites", joinColumns = { @JoinColumn(referencedColumnName = "post_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "profile_id") })
     private List<Profile> favoredBy;
     
-    @ManyToMany (mappedBy = "profile")
+    @ManyToMany
+    @JoinTable(name = "upvotes", joinColumns = { @JoinColumn(referencedColumnName = "post_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "profile_id") })
     private List<Profile> upvotedBy;
     
-    @ManyToMany(mappedBy = "profile")
+    @ManyToMany
+    @JoinTable(name = "downvotes", joinColumns = { @JoinColumn(referencedColumnName = "post_id") }, inverseJoinColumns = { @JoinColumn(referencedColumnName = "profile_id") })
     private List<Profile> downvotedBy;
     
 
     @ManyToOne(optional = false)
+    private Post editedPost;
+    @OneToMany(mappedBy="editedPost")
     private List<Post> edits;
+    
 
     public Post() {
 
@@ -81,6 +91,14 @@ public class Post {
     
     public Profile getAuthor() {
     	return this.author;
+    }
+    
+    public void setThread(Thread thread) {
+	this.thread = thread;
+    }
+    
+    public Thread getThread() {
+    	return this.thread;
     }
 
 

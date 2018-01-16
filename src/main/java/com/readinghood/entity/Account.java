@@ -43,10 +43,9 @@ public class Account {
 
     @Column(name = "account_role")
     @Enumerated(EnumType.STRING)
-    // @ColumnDefault(value = "'" + Role.Values.USER + "'")
     private Role accountRole;
 
-    @OneToOne(optional = false, targetEntity = Profile.class)
+    @OneToOne(targetEntity = Profile.class)
     private Profile profile;
 
     public Account(String email, String password) {
