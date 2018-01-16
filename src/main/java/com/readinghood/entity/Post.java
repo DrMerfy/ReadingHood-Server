@@ -30,11 +30,20 @@ public class Post {
     @Column(name = "post_text")
     private String text;
 
-    @OneToMany(optional = false, targetEntity = Profile.class)
+    @OneToMany(targetEntity = Profile.class)
     private Profile author;
 
-    @ManyToMany(optional = false)
-    private Long votes;
+    
+    
+    @ManyToMany (mappedBy = "profile")
+    private List<Profile> favoredBy;
+    
+    @ManyToMany (mappedBy = "profile")
+    private List<Profile> upvotedBy;
+    
+    @ManyToMany(mappedBy = "profile")
+    private List<Profile> downvotedBy;
+    
 
     @ManyToOne(optional = false)
     private List<Post> edits;
@@ -42,9 +51,14 @@ public class Post {
     public Post() {
 
     }
+    
+    public Post(String aText, Instant aTimestamp) {
+    	text = aText;
+    	timestamp = aTimestamp;
+    }
 
     public void setId(Long Id) {
-	this.id = id;
+	this.id = Id;
     }
 
     public Long getId() {
@@ -62,14 +76,11 @@ public class Post {
     public void setAuthor(Profile author) {
 	this.author = author;
     }
-
-    public void setVotes(Long votes) {
-	this.votes = votes;
+    
+    public Profile getAuthor() {
+    	return this.author;
     }
 
-    public void getVotes() {
-	return this.votes;
-    }
 
     public void edit(Post edit) {
 	this.edits.add(edit);
@@ -78,4 +89,41 @@ public class Post {
     public List<Post> getEdits() {
 	return this.edits;
     }
+    
+    public List<Profile> getDownvoters(){
+    	return downvotedBy;
+    }
+    
+    public void setDownvoters(List<Profile> downvoters) {
+    	this.upvotedBy = downvoters;
+    }
+    
+    public List<Profile> getUpvoters(){
+    	return upvotedBy;
+    }
+    
+    public void setUpvoters(List<Profile> upvoters) {
+    	this.upvotedBy = upvoters;
+    }
+    
+    public List<Profile> getListOfFavorers(){
+    	return favoredBy;
+    }
+    
+    public void setListOfFavorers(List<Profile> favorers) {
+    	this.favoredBy = favorers;
+    }
+    
+    public void downvoted(Profile aProfile) {
+    	this.downvotedBy.add(aProfile);
+    }
+    
+    public void upvoted(Profile aProfile) {
+    	this.upvotedBy.add(aProfile);
+    }
+    
+    public void favorited(Profile aProfile) {
+    	this.favoredBy.add(aProfile);
+    }
+
 }
