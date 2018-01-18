@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.readinghood.repository.AccountRepository;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -77,12 +83,33 @@ public class MainController {
 
     }
 
+    
+    /*
+        API page
+     */
+    @RequestMapping(path = "/api", produces = MediaType.TEXT_HTML_VALUE)
+    public @ResponseBody
+    String hello() {
+
+        String html = null;
+        byte[] encoded;
+        try {
+            encoded = Files.readAllBytes(Paths.get("api.html"));
+               html = new String(encoded);
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return html;
+
+    }
+    
     /*
         Home page
      */
     @RequestMapping(path = "/")
     public @ResponseBody
-    String hello() {
+    String homePage() {
 
         return "CONNECTED - Welcome to ReadingHood Server :)";
 

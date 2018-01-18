@@ -153,6 +153,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/register");
+        web.ignoring().antMatchers("/api");
         web.ignoring().antMatchers("/");
     }
 
