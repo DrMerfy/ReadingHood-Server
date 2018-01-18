@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color: 	#080808; color:wheat;">
+
+<h1>ReadingHood Server API</h1>
+<p>
+The ReadingHood server uses RESTful API. All actions are performed with HTTP requests.<br/>
+Every request (except register) needs authentication with email and password of the ReadingHood user.<br/>
+To create a link you should start with: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/</b></font></code><br/>
+Then you add the parameters according to the instructions below.<br/>
+</p>
+<h2>Register</h2>
+It is used for registering a user to the ReadingHood Server.<br/>
+Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/register</b></font></code><br/>
+Parameters:
+<ul>
+	<li>username</li>
+	<li>email</li>
+	<li>password</li>
+	<li>name (optional)</li>
+	<li>surname (optional)</li>
+	<li>department (optional)</li>
+</ul>
+Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/register?username=test_user&email=test@mail.gr&password=test_password&name=Test&surname=User&department=AUTH</b></font></code><br/>
+Result: <b>OK</b>
+
+<h2>Profile</h2>
+Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles</b></font></code><br/>
+
+<h3>Functions</h3>
+<ul>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/all</b></font></code><br/>
+		Returns all the profiles<br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/all</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+[
+  {
+	"id": 1,
+	"name": "First",
+	"surname": "Account",
+	"department": "CSD",
+  },
+  {
+	"id": 2,
+	"name": "Test",
+	"surname": "User",
+	"department": "AUTH",
+  }
+]
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchId</b></font></code><br/>
+		Searches profile with the given id<br/>
+		Parameter:
+		<ul>
+			<li>id</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchId?id=2</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+{
+	"id": 1,
+	"name": "First",
+	"surname": "Account",
+	"department": "CSD",
+}
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/search</b></font></code><br/>
+		Searches account according to the given name and surname<br/>
+		Parameter:
+		<ul>
+			<li>id</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/search?name=t&surname=us</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+{
+  "id": 2,
+  "name": "Test",
+  "surname": "User",
+  "department": "AUTH"
+}
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchName</b></font></code><br/>
+		Searches account according to the given name
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchSurname</b></font></code><br/>
+		Searches account according to the given surname
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchDepartment</b></font></code><br/>
+		Searches account according to the given department
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/favorites</b></font></code><br/>
+		Returns the favorite threads of connected user
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/editName</b></font></code><br/>
+		Changes the name of connected user
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/editSurname</b></font></code><br/>
+		Changes the surname of connected user
+	</li>
+</ul>
+
+
+</body>
+</html>
