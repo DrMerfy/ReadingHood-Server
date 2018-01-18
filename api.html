@@ -220,6 +220,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 		<ul>
 			<li>name</li>
 		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/editname?name=George</b></font></code><br/>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/editSurname</b></font></code><br/>
@@ -228,7 +229,236 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 		<ul>
 			<li>surname</li>
 		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/editsurname?surname=Sakidis</b></font></code><br/>
 	</li>
+
+</ul>
+
+
+
+
+
+<h2>Thread</h2>
+Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</b></font></code><br/>
+
+<h3>Functions</h3>
+<ul>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/all</b></font></code><br/>
+		Returns all the threads<br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/all</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+			{
+				"id":1,"title":"Welcome",
+				"views":0,
+				"tags":[],
+				"posts":[{
+					 	"id":1,
+						"text":"Welcome to readingHood",
+						"author":{
+								"id":1,
+								"name":"abioiotre",
+								"surname":"def",
+								"department":"auth"},
+					"upvoters":[],
+					"downvoters":[],
+					"numberOfPosts":0}]
+			}
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchById</b></font></code><br/>
+		Returns thread with the given id<br/>
+		Parameter:
+		<ul>
+			<li>id</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/searchById?id=2</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+			{
+				"id":2,"title":"Hello!Welcome",
+				"views":0,
+				"tags":[],
+				"posts":[{
+						"id":1,
+						"text":"Welcome to readingHood",
+						"author":{
+								"id":1,
+								"name":"abioiotre",
+								"surname":"def",
+								"department":"auth"},
+					"upvoters":[],
+					"downvoters":[],
+					"numberOfPosts":0}]
+			}
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/search</b></font></code><br/>
+		Returns the threads that contain the given text<br/>
+		Parameter:
+		<ul>
+			<li>text</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/search?text=readinghood</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+			{
+				"id":2,"title":"Hello!Welcome",
+				"views":0,
+				"tags":[],
+				"posts":[{
+						"id":1,
+						"text":"Welcome to readingHood",
+						"author":{
+								"id":1,
+								"name":"abioiotre",
+								"surname":"def",
+								"department":"auth"},
+					"upvoters":[],
+					"downvoters":[],
+					"numberOfPosts":0}]
+			}
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/recent</b></font></code><br/>
+		Returns the threads ordered by most recent<br/>
+		Parameters:
+		<ul>
+			<li>none</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/recent</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+			{
+				"id":2,"title":"Hello!Welcome",
+				"views":0,
+				"tags":[],
+				"posts":[{
+						"id":1,
+						"text":"Welcome to readingHood",
+						"author":{
+								"id":1,
+								"name":"abioiotre",
+								"surname":"def",
+								"department":"auth"},
+					"upvoters":[],
+					"downvoters":[],
+					"numberOfPosts":0}]
+			}
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/popular</b></font></code><br/>
+		Returns the threads ordered by most popular
+		Parameters:
+		<ul>
+			<li>none</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/popular</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+[			{
+				"id":2,"title":"Hello!Welcome",
+				"views":0,
+				"tags":[],
+				"posts":[{
+						"id":1,
+						"text":"Welcome to readingHood",
+						"author":{
+								"id":1,
+								"name":"abioiotre",
+								"surname":"def",
+								"department":"auth"},
+					"upvoters":[],
+					"downvoters":[],
+					"numberOfPosts":0}]
+			}
+			,
+
+			{
+							"id":3,"title":"What is Java?",
+							"views":0,
+							"tags":[],
+							"posts":[{
+									"id":1,
+									"text":"I can't understand what is java...call you tell me what is?",
+									"author":{
+											"id":1,
+											"name":"james",
+											"surname":"gosling",
+											"department":"harvard"},
+								"upvoters":[],
+								"downvoters":[],
+								"numberOfPosts":0}]
+						}
+			,
+			{
+							"id":16,"title":"How templates works in C++?",
+							"views":0,
+							"tags":[],
+							"posts":[{
+									"id":1,
+									"text":"I can't understand how ..",
+									"author":{
+											"id":1,
+											"name":"dimitris",
+											"surname":"sfigopoulos",
+											"department":"auth"},
+								"upvoters":[],
+								"downvoters":[],
+								"numberOfPosts":0}]
+]
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/viewed</b></font></code><br/>
+		 Increaces by one the views of thread with the given id
+		Parameters:
+		<ul>
+			<li>ID</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/viewed?id=36</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+			13
+		</pre></font>
+
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/favorite</b></font></code><br/>
+		Adds the thread with the given id to favorites of the connected user 
+		Parameters:
+		<ul>
+			<li>none</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/favorites</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+
+			OK
+		</pre></font>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/new</b></font></code><br/>
+		Creates new thread
+		Parameters:
+		<ul>
+			<li>title</li>
+			<li>text</li>
+			<li>tags</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/new?title=What is Json&text=my question is what is json...&tags=json,spring</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+
+			OK
+		</pre></font>
+	</li>
+
 
 </ul>
 
