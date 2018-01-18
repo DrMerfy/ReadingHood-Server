@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.readinghood.repository.ThreadRepository;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -166,13 +167,15 @@ public class ThreadController {
         post.setThread(thread);
         author.addCreatedPost(post);
         
-        for (String tagName : tags){
-            Tag tag = tagRepository.findByName(tagName);
-            if (tag == null){
-                tag = new Tag(tagName);                
+        if (tags!=null){
+            for (String tagName : tags) {
+                Tag tag = tagRepository.findByName(tagName);
+                if (tag == null){
+                    tag = new Tag(tagName);                
+                }
+                thread.addTag(tag);
+                tag.addThread(thread);
             }
-            thread.addTag(tag);
-            tag.addThread(thread);
         }
         
         
