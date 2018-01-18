@@ -39,8 +39,8 @@ public class Tag {
         this.name = name;
     }
 
-    public long getId(){
-        return id;
+    public Long getId(){
+        return this.id;
     }
 
     public void setId(long id){
