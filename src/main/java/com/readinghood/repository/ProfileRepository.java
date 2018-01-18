@@ -5,17 +5,22 @@
  */
 package com.readinghood.repository;
 
-import com.readinghood.entity.Account;
+import com.readinghood.entity.Profile;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
+public interface ProfileRepository extends CrudRepository<Profile, Long> {
 
-public interface ProfileRepository extends CrudRepository<Account, Long> {
-                    
     @Override
-    List<Account> findAll();
-    
-    
+    List<Profile> findAll();
+
+    Profile findById(Long id);
+
+    List<Profile> findByNameStartingWith(String name);
+    List<Profile> findBySurnameStartingWith(String surname);
+    List<Profile> findByNameStartingWithAndSurnameStartingWith(String name, String surname);
+    List<Profile> findByDepartment(String department);
+
 }
