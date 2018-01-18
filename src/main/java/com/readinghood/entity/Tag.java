@@ -1,37 +1,42 @@
 package com.readinghood.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name="tag",indexes = {@Index(columnList = "tag_id"),@Index(columnList = "tag_views"),@Index(columnList = "tag_name")})
+@Table(name="tag",indexes = {@Index(columnList = "tag_id"), @Index(columnList = "tag_name")})
 public class Tag {
-
-//tag_id (PK)
-//views
-//threads (1:N)
-
+    
     @Id
     @Column(name="tag_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="tag_views")
+    @Column(name="tag_usages")
     @NotNull
-    private int views;
+    private int usages;
 
     @Column(name = "tag_name")
+    @NotNull
     private String name;
 
-    @ManyToMany
-    @JoinTable(name="Thread_Tag",
-            joinColumns ={@JoinColumn(name="tag_id")},
-            inverseJoinColumns = {@JoinColumn(name="thread_id")})
+    @ManyToMany(mappedBy="tags")
+    @JsonBackReference
     List<Thread> threads;
 
     public Tag(){
-        this.views=0;
+        this.usages=0;
+        this.threads = new ArrayList<>();
+    }
+    
+    
+    public Tag(String name){
+        this();
+        this.name = name;
     }
 
     public long getId(){
@@ -42,12 +47,12 @@ public class Tag {
         this.id=id;
     }
 
-    public int getViews(){
-        return views;
+    public int getUsages(){
+        return usages;
     }
 
-    public void setViews(int views){
-        this.views=views;
+    public void setUsages(int usages){
+        this.usages=usages;
     }
 
     public String getName(){
@@ -56,6 +61,22 @@ public class Tag {
 
     public void  setName(String name){
         this.name=name;
+    }
+    
+    public List<Thread> getThreads(){
+        return threads;
+    }
+
+    public void  setThreads(List<Thread> threads){
+        this.threads=threads;
+    }
+    
+    public void addThread(Thread thread){
+        this.threads.add(thread);
+    }
+    
+    public void increaseUsages(){
+        this.usages++;
     }
 
 }
