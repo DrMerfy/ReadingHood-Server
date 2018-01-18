@@ -74,7 +74,8 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 		Searches account according to the given name and surname<br/>
 		Parameter:
 		<ul>
-			<li>id</li>
+			<li>name</li>
+			<li>surname</li>
 		</ul>
 		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/search?name=t&surname=us</b></font></code><br/>
 		Result:
@@ -89,28 +90,146 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchName</b></font></code><br/>
-		Searches account according to the given name
+		Searches account according to the given name<br/>
+		Parameters:
+		<ul>
+			<li>name</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchName?name=Tasos</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+[
+	{
+		"id": 2,
+		"name": "Tasos",
+		"surname": "Papadopoulos",
+		"department": "AUTH"
+	}
+	,
+	{
+		"id": 6,
+		"name": "Tasos",
+		"surname": "Dimitrioy",
+		"department": "DUTH"
+	}
+]
+		</pre></font>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchSurname</b></font></code><br/>
 		Searches account according to the given surname
+		Parameters:
+		<ul>
+			<li>surname</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchSurname?name=Sviggas</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+[
+	{
+		"id": 18,
+		"name": "James",
+		"surname": "Sviggas",
+		"department": "AUTH"
+	}
+	,
+	{
+		"id": 34,
+		"name": "Shakey",
+		"surname": "Sviggas",
+		"department": null
+	}
+	,
+	{
+		"id": 734,
+		"name": "Dimosthenis",
+		"surname": "Sviggas",
+		"department": "DUTH"
+	}
+]
+		</pre></font>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchDepartment</b></font></code><br/>
 		Searches account according to the given department
+		Parameters:
+		<ul>
+			<li>department</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchDepartment?department=AUTH</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+[
+	{
+		"id": 18,
+		"name": "James",
+		"surname": "Ioannides",
+		"department": "AUTH"
+	}
+	,
+	{
+		"id": 34,
+		"name": "Shakey",
+		"surname": "Georgides",
+		"department": "AUTH"
+	}
+	,
+	{
+		"id": 734,
+		"name": "Dimosthenis",
+		"surname": "Aetopoulos",
+		"department": "AUTH"
+	}
+]
+		</pre></font>
+
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/favorites</b></font></code><br/>
 		Returns the favorite threads of connected user
+		Parameters:
+		<ul>
+			<li>none</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/favorites</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+
+{
+	"id":1,"title":"Welcome",
+	"views":0,
+	"tags":[],
+	"posts":[{
+		 	"id":1,
+			"text":"Welcome to readingHood",
+			"author":{
+					"id":1,
+					"name":"abioiotre",
+					"surname":"def",
+					"department":"auth"},
+		"upvoters":[],
+		"downvoters":[],
+		"numberOfPosts":0}]
+}
+		</pre></font>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/editName</b></font></code><br/>
 		Changes the name of connected user
+		Parameters:
+		<ul>
+			<li>name</li>
+		</ul>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/editSurname</b></font></code><br/>
 		Changes the surname of connected user
+		Parameters:
+		<ul>
+			<li>surname</li>
+		</ul>
 	</li>
+
 </ul>
 
 
