@@ -89,7 +89,7 @@ public class MainController {
      */
     @RequestMapping(path = "/api", produces = MediaType.TEXT_HTML_VALUE)
     public @ResponseBody
-    String hello() {
+    String apiPage() {
 
         String html = null;
         byte[] encoded;
