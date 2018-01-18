@@ -5,14 +5,19 @@
  */
 package com.readinghood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -20,7 +25,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Table(name = "account", indexes = { @Index(columnList = "account_id"), @Index(columnList = "account_username"), @Index(columnList = "account_email") })
+@Table(name = "account", indexes = {
+    @Index(columnList = "account_id")
+    , @Index(columnList = "account_username")
+    , @Index(columnList = "account_email")})
 public class Account {
 
     @Id
@@ -45,58 +53,64 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Role accountRole;
 
-    @OneToOne(targetEntity = Profile.class)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
+    @JsonManagedReference
     private Profile profile;
 
     public Account(String email, String password) {
-	this.email = email;
-	this.password = password;
+        this.email = email;
+        this.password = password;
     }
 
     public Account() {
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getEmail() {
-	return email;
+        return email;
     }
 
     public void setEmail(String email) {
-	this.email = email;
+        this.email = email;
     }
 
     public String getUsername() {
-	return username;
+        return username;
     }
 
     public void setUsername(String username) {
-	this.username = username;
+        this.username = username;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
     }
 
     public String getPassword() {
-	return password;
+        return password;
     }
 
     public void setPassword(String password) {
-	this.password = password;
+        this.password = password;
     }
-    /*
-     * public Profile getProfile() { return profile; } public void setProfile(Profile profile) { this.profile = profile;
-     * }
-     */
 
     public Role getAccountRole() {
-	return accountRole;
+        return accountRole;
     }
 
     public void setAccountRole(Role accountRole) {
-	this.accountRole = accountRole;
+        this.accountRole = accountRole;
     }
 }

@@ -185,7 +185,6 @@ public class Profile {
 	this.downvotes.add(post);
     }
 
-
     /*
     public List<Tag> getSavedTags() {
 	return savedTags;
