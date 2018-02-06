@@ -133,10 +133,45 @@ public class PostController {
             return "Post not found";
         }
 
-        return String.valueOf(post.getNumberOfPosts());
+        return String.valueOf(post.getNumberOfVotes());
 
     }
 
+    
+    /*
+      Returns the posts created by the connected user
+    */
+    @GetMapping(path = "/created")
+    public @ResponseBody
+    List<Post> getCreated() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        return user.getCreatedPosts();
+    }
+    
+    /*
+      Returns the posts upvoted by the connected user
+    */
+    @GetMapping(path = "/upvoted")
+    public @ResponseBody
+    List<Post> getUpvoted() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        return user.getUpvotes();
+    }
+    
+    /*
+      Returns the posts downvoted by the connected user
+    */
+    @GetMapping(path = "/downvoted")
+    public @ResponseBody
+    List<Post> getDownvoted() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        return user.getDownvotes();
+    }
+    
+    
     /*
       Creates post in specific thread with the given thread id and the given text<
      */
