@@ -154,7 +154,7 @@ public class Post {
     }
     
     
-    public int getNumberOfPosts(){
+    public int getNumberOfVotes(){
         return upvoters.size() - downvoters.size();
     }
 
