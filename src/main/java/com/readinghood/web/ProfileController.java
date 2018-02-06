@@ -134,7 +134,7 @@ public class ProfileController {
             return "Name must have at least one character";
         }
 
-        user.setName(surname);
+        user.setSurname(surname);
         profileRepository.save(user);
         return "OK";
 
