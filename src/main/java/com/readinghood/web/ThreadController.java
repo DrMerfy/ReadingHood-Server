@@ -147,7 +147,7 @@ public class ThreadController {
     }
 
     /*
-      Returns the posts created by the connected user
+      Returns the threads created by the connected user
      */
     @GetMapping(path = "/created")
     public @ResponseBody
