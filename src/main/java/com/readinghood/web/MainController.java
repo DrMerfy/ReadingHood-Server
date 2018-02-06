@@ -83,7 +83,6 @@ public class MainController {
 
     }
 
-    
     /*
         API page
      */
@@ -104,6 +103,16 @@ public class MainController {
 
     }
     
+    
+    /*
+        Verify page
+     */
+    @RequestMapping(path = "/verify")
+    public @ResponseBody
+    String afterLoginPage() {
+        return "OK";
+    }
+    
     /*
         Home page
      */
@@ -111,7 +120,7 @@ public class MainController {
     public @ResponseBody
     String homePage() {
 
-        return "CONNECTED - Welcome to ReadingHood Server :)";
+        return "<p style=\"position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);\">Welcome to ReadingHood Server :)</p>";
 
     }
 
