@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
@@ -156,6 +157,10 @@ public class Post {
     
     public int getNumberOfVotes(){
         return upvoters.size() - downvoters.size();
+    }
+    
+    public boolean getIsQuestion(){
+        return this.equals(this.getThread().getQuestion());
     }
 
 }
