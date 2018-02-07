@@ -55,7 +55,7 @@ public class Thread {
     
     
     public Thread(String title, Post post) {
-        this(title);      
+        this(title);
         addPost(post);
     }
     
@@ -113,9 +113,7 @@ public class Thread {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
-    
+        
     public List<Profile> getfavoredBy(){
     	return favoredBy;
     }
@@ -126,6 +124,11 @@ public class Thread {
     
     public void addFavorer(Profile profile){
         this.favoredBy.add(profile);
+    }
+    
+    @JsonIgnore
+    public Post getQuestion(){
+        return this.posts.get(0);
     }
     
 }
