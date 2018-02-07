@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.readinghood.repository.ThreadRepository;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -158,10 +159,13 @@ public class ThreadController {
         List<Thread> createdThreads = new ArrayList<>();
         List<Post> createdPosts = user.getCreatedPosts();
 
-        createdPosts.forEach((post) -> {
-            createdThreads.add(post.getThread());
+        createdPosts.forEach((Post post) -> {
+            if (post.getIsQuestion()) {
+                createdThreads.add(post.getThread());
+            }
         });
 
+        Collections.reverse(createdThreads);
         return createdThreads;
     }
 
