@@ -5,14 +5,12 @@
  */
 package com.readinghood.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,10 +23,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Table(name = "account", indexes = {
-    @Index(columnList = "account_id")
-    , @Index(columnList = "account_username")
-    , @Index(columnList = "account_email")})
+@Table(name = "account", indexes = {@Index(columnList = "account_id"), @Index(columnList = "account_email")})
 public class Account {
 
     @Id
@@ -40,10 +35,6 @@ public class Account {
     @Email
     @NotNull
     private String email;
-
-    @Column(name = "account_username")
-    @NotNull
-    private String username;
 
     @Column(name = "account_password")
     @NotNull
@@ -82,22 +73,6 @@ public class Account {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public Profile getProfile() {
-        return this.profile;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -113,4 +88,13 @@ public class Account {
     public void setAccountRole(Role accountRole) {
         this.accountRole = accountRole;
     }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
+    }
+
 }
