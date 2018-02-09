@@ -148,17 +148,16 @@ public class ThreadController {
     }
 
     /*
-      Returns the threads created by the connected user
+      Returns the threads created by the profile with the given id
      */
     @GetMapping(path = "/created")
     public @ResponseBody
-    List<Thread> getCreated() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+    List<Thread> getCreated(@RequestParam Long profile_id) {
+               
+        Profile profile = profileRepository.findById(profile_id);        
+        List<Post> createdPosts = profile.getCreatedPosts();
 
         List<Thread> createdThreads = new ArrayList<>();
-        List<Post> createdPosts = user.getCreatedPosts();
-
         createdPosts.forEach((Post post) -> {
             if (post.getIsQuestion()) {
                 createdThreads.add(post.getThread());
@@ -167,6 +166,51 @@ public class ThreadController {
 
         Collections.reverse(createdThreads);
         return createdThreads;
+    }
+
+    /*
+      Returns the threads created by users from the same department as the connected user
+     */
+    @GetMapping(path = "/sameDepartment")
+    public @ResponseBody
+    List<Thread> getSameDepartment() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+
+        String myDepartment = user.getDepartment();
+        
+        List<Thread> allThreads = threadRepository.findAll();
+        List<Thread> sameDepartmentThreads = new ArrayList<>();
+
+        allThreads.forEach((Thread thread) -> {
+            if (myDepartment.equals(thread.getQuestion().getAuthor().getDepartment())) {
+                sameDepartmentThreads.add(thread);
+            }
+        });
+
+        Collections.reverse(sameDepartmentThreads);
+        return sameDepartmentThreads;
+    }
+
+
+    /*
+      Returns the threads created by users from the given department
+     */
+    @GetMapping(path = "/byDepartment")
+    public @ResponseBody
+    List<Thread> getByDepartment(@RequestParam String department) {
+        
+        List<Thread> allThreads = threadRepository.findAll();
+        List<Thread> sameDepartmentThreads = new ArrayList<>();
+
+        allThreads.forEach((Thread thread) -> {
+            if (department.equals(thread.getQuestion().getAuthor().getDepartment())) {
+                sameDepartmentThreads.add(thread);
+            }
+        });
+
+        Collections.reverse(sameDepartmentThreads);
+        return sameDepartmentThreads;
     }
 
     /*
