@@ -32,7 +32,7 @@ public class AccountController {
     }
 
     /*
-      Returns the account according to the email
+      Returns the data of the account with the given username
     */
     @GetMapping(path = "/searchEmail")
     public @ResponseBody
@@ -40,13 +40,5 @@ public class AccountController {
         return accountRepository.findByEmail(email);
     }
 
-    /*
-      Returns the accounts according to the username
-    */
-    @GetMapping(path = "/searchUsername")
-    public @ResponseBody
-    Iterable<Account> getAccountsByUsername(@RequestParam String username) {
-        return accountRepository.findByUsername(username);
-    }
 
 }
