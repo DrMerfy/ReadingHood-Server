@@ -22,5 +22,7 @@ public interface ProfileRepository extends CrudRepository<Profile, Long> {
     List<Profile> findBySurnameStartingWith(String surname);
     List<Profile> findByNameStartingWithAndSurnameStartingWith(String name, String surname);
     List<Profile> findByDepartment(String department);
+    List<Profile> findByUsername(String username);
+    List<Profile> findByUsernameStartingWith(String username);
 
 }
