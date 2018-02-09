@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <style>
-
 h2 {
     background: #596dff;
     color: white;
     padding: 7px;
     border-radius: 4px;
 }
-
 </style>
 
 <body style="background-color: #e0e1ffd6;color:black;font-family: monospace;">
@@ -28,7 +26,7 @@ h2 {
 <p>
 The ReadingHood server uses RESTful API. All actions are performed with HTTP requests.<br/>
 Every request (except register) needs authentication with email and password of the ReadingHood user.<br/>
-To create a link you should start with: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/</b></font></code><br/>
+To create a link you should start with: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/</b></font></code><br/>
 Then you add the parameters according to the instructions below.<br/>
 </p>
 <h2>Register</h2>
@@ -43,18 +41,54 @@ Parameters:
 	<li>surname (optional)</li>
 	<li>department (optional)</li>
 </ul>
-Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/register?username=test_user&email=test@mail.gr&password=test_password&name=Test&surname=User&department=AUTH</b></font></code><br/>
+Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/register?username=test_user&email=test@mail.gr&password=test_password&name=Test&surname=User&department=AUTH</b></font></code><br/>
 Result: <b>OK</b>
 
 <h2>Verify</h2>
-It is used for verifying a user to the ReadingHood Server.(If you are not logged in , it redirects you to the login page)<br/>
+It is used for verifying a user to the ReadingHood Server.(If you are not logged in, it redirects you to the login page)<br/>
 Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/verify</b></font></code><br/>
 Parameters:
 <ul>
 	<li>none</li>
 </ul>
-Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/verify</b></font></code><br/>
+Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/verify</b></font></code><br/>
 Result: <b>OK</b>
+
+
+<h2>Account</h2>
+Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/accounts</b></font></code><br/>
+
+<h3>Functions</h3>
+<ul>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchEmail</b></font></code><br/>
+		Returns the data of the account with the given email<br/>
+		Parameter:
+		<ul>
+			<li>email</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/accounts/searchEmail?email=test@mail.gr</b></font></code><br/>
+		Result:
+		<font color="green"><pre>
+{
+  "id": 6,
+  "email": "test@mail.gr",
+  "password": "$2a$10$kbvl5eS4Ejap85GAHW/pxe0CwQ7QwxvlCyFBVA6tzGC6kvGZ9H1M.",
+  "accountRole": "USER",
+  "profile": {
+    "id": 6,
+    "name": "Test",
+    "surname": "User",
+    "department": "AUTH"
+  }
+}
+		</pre></font>
+	</li>
+	
+</ul>
+
+
+
 
 <h2>Profile</h2>
 Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles</b></font></code><br/>
@@ -64,7 +98,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/all</b></font></code><br/>
 		Returns all the profiles<br/>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/all</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/all</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 [
@@ -90,7 +124,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 		<ul>
 			<li>id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchId?id=2</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/searchId?id=2</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 {
@@ -109,7 +143,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 			<li>name</li>
 			<li>surname</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/search?name=t&surname=us</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/search?name=t&surname=us</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 {
@@ -127,7 +161,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 		<ul>
 			<li>name</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchName?name=Tasos</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/searchName?name=Tasos</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 [
@@ -149,12 +183,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchSurname</b></font></code><br/>
-		Searches account according to the given surname
+		Searches account according to the given surname<br />
 		Parameters:
 		<ul>
 			<li>surname</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchSurname?name=Sviggas</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/searchSurname?name=Sviggas</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 [
@@ -181,14 +215,24 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 ]
 		</pre></font>
 	</li>
+	
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchUsername</b></font></code><br/>
+		Returns the data of the profiles with the given username<br/>
+		Parameter:
+		<ul>
+			<li>username</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/searchUsername?username=test_user</b></font></code><br/>
+	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/searchDepartment</b></font></code><br/>
-		Searches account according to the given department
+		Searches account according to the given department<br />
 		Parameters:
 		<ul>
 			<li>department</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/searchDepartment?department=AUTH</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/searchDepartment?department=AUTH</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 [
@@ -218,12 +262,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/favorites</b></font></code><br/>
-		Returns the favorite threads of connected user
+		Returns the favorite threads of connected user<br />
 		Parameters:
 		<ul>
 			<li>none</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/favorites</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/favorites</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 
@@ -247,21 +291,31 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/profiles<
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/editName</b></font></code><br/>
-		Changes the name of connected user
+		Changes the name of connected user<br />
 		Parameters:
 		<ul>
 			<li>name</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/editname?name=George</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/editname?name=George</b></font></code><br/>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/editSurname</b></font></code><br/>
-		Changes the surname of connected user
+		Changes the surname of connected user<br />
 		Parameters:
 		<ul>
 			<li>surname</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/profiles/editsurname?surname=Sakidis</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/editsurname?surname=Sakidis</b></font></code><br/>
+	</li>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/votes</b></font></code><br/>
+		Returns the total votes from the posts of the user with the given id<br />
+		Parameters:
+		<ul>
+			<li>profile_id</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/profiles/votes?profile_id=1</b></font></code><br/>
 	</li>
 
 </ul>
@@ -278,7 +332,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/all</b></font></code><br/>
 		Returns all the threads<br/>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/all</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/all</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -306,7 +360,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 		<ul>
 			<li>id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/searchById?id=2</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/searchById?id=2</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -334,7 +388,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 		<ul>
 			<li>text</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/search?text=readinghood</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/search?text=readinghood</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -362,7 +416,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 		<ul>
 			<li>none</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/recent</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/recent</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -385,12 +439,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/popular</b></font></code><br/>
-		Returns the threads ordered by most popular
+		Returns the threads ordered by most popular<br />
 		Parameters:
 		<ul>
 			<li>none</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/popular</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/popular</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 [			{
@@ -448,12 +502,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/viewed</b></font></code><br/>
-		 Increaces by one the views of thread with the given id
+		Increaces by one the views of thread with the given id<br />
 		Parameters:
 		<ul>
 			<li>ID</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/viewed?id=36</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/viewed?id=36</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			13
@@ -462,28 +516,56 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/threads</
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/favorite</b></font></code><br/>
-		Adds the thread with the given id to favorites of the connected user
+		Adds the thread with the given id to favorites of the connected user<br />
 		Parameters:
 		<ul>
 			<li>id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/favorite?thread_id=0</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/favorite?thread_id=0</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
-
 			OK
 		</pre></font>
 	</li>
 	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/created</b></font></code><br/>
+		Returns the threads created by the profile with the given id<br />
+		Parameter:
+		<ul>
+			<li>profile_id</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/created?profile_id=1</b></font></code><br/>
+	</li>
+	</li>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/sameDepartment</b></font></code><br/>
+		Returns the threads created by users from the same department as the connected user<br />
+		Parameters:
+		<ul>
+			<li>none</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/sameDepartment</b></font></code><br/>
+	</li>
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/byDepartment</b></font></code><br/>
+		Returns the threads created by users from the given department<br />
+		Parameter:
+		<ul>
+			<li>department</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/byDepartment?department=CSD</b></font></code><br/>
+	</li>
+	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/new</b></font></code><br/>
-		Creates new thread
+		Creates new thread<br />
 		Parameters:
 		<ul>
 			<li>title</li>
 			<li>text</li>
 			<li>tags</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/threads/new?title=What is Json&text=my question is what is json...&tags=json,spring</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/threads/new?title=What is Json&text=my question is what is json...&tags=json,spring</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 
@@ -504,7 +586,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/all</b></font></code><br/>
 		Returns all the existing tags<br/>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/all</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/all</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			[
@@ -543,7 +625,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 		<ul>
 			<li>id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/searchId?id=2</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/searchId?id=2</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -560,7 +642,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 		<ul>
 			<li>name</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/searchName?name=ccc</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/searchName?name=ccc</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -577,7 +659,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 		<ul>
 			<li>name</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/search?name=jav</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/search?name=jav</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -589,12 +671,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/views</b></font></code><br/>
-		Returns the views of tag with the given id
+		Returns the views of tag with the given id<br />
 		Parameters:
 		<ul>
 			<li>id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/views?id=0</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/views?id=0</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			1
@@ -602,12 +684,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/mostUsed</b></font></code><br/>
-		Returns the tags order by most used
+		Returns the tags order by most used<br />
 		Parameters:
 		<ul>
 			<li>none</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/mostUsed</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/mostUsed</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			[
@@ -667,12 +749,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/threads</b></font></code><br/>
-		Returns the threads that use the tag with the given name
+		Returns the threads that use the tag with the given name<br />
 		Parameters:
 		<ul>
 			<li>name</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/threads?name=java</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/threads?name=java</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 
@@ -717,12 +799,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/tags</b><
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/new</b></font></code><br/>
-		Creates new tag
+		Creates new tag<br />
 		Parameters:
 		<ul>
 			<li>name</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/tags/new?name=Coral</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/tags/new?name=Coral</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 
@@ -743,7 +825,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/all</b></font></code><br/>
 		Returns all posts<br/>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/all</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/all</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			[
@@ -777,7 +859,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 		<ul>
 			<li>id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/searchId?id=2</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/searchId?id=2</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -810,7 +892,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 		<ul>
 			<li>none</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/recent</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/recent</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			{
@@ -849,7 +931,7 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 		<ul>
 			<li>post_id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/upvote?post_id=0</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/upvote?post_id=0</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			OK
@@ -857,12 +939,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/downvote</b></font></code><br/>
-		Downvotes the post with the given id
+		Downvotes the post with the given id<br />
 		Parameters:
 		<ul>
 			<li>post_id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/downvote?post_id=0</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/downvote?post_id=0</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			OK
@@ -870,12 +952,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/numberOfVotes</b></font></code><br/>
-		Returns the number of votes of the post with the given id
+		Returns the number of votes of the post with the given id<br />
 		Parameters:
 		<ul>
 			<li>post_id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/numberOfVotes?post_id=0</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/numberOfVotes?post_id=0</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 			12
@@ -884,12 +966,12 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/created</b></font></code><br/>
-		Returns the posts created by the connected user
-		Parameters:
+		Returns the posts created by the profile with the given id<br />
+		Parameter:
 		<ul>
-			<li>none</li>
+			<li>profile_id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/created</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/created?profile_id=1</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 
@@ -926,45 +1008,43 @@ Mapping: <code><font color="blue" style="background-color:#e6e6e6"><b>/posts</b>
 	</li>
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/upvoted</b></font></code><br/>
-		Returns the posts upvoted by the connected user
-		Parameters:
+		Returns the posts upvoted by the profile with the given id<br />
+		Parameter:
 		<ul>
-			<li>none</li>
+			<li>profile_id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/upvoted</b></font></code><br/>
-		Result:
-		<font color="green"><pre>
-
-			[]
-
-		</pre></font>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/upvoted?profile_id=1</b></font></code><br/>
 	</li>
 
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/downvoted</b></font></code><br/>
-		Returns the posts downvoted by the connected user
-		Parameters:
+		Returns the posts downvoted by the profile with the given id<br />
+		Parameter:
 		<ul>
-			<li>none</li>
+			<li>profile_id</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/downvoted</b></font></code><br/>
-		Result:
-		<font color="green"><pre>
-
-			[]
-
-		</pre></font>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/downvoted?profile_id=1</b></font></code><br/>
+	</li>
+	
+	<li>
+		<code><font color="blue" style="background-color:#e6e6e6"><b>/byThread</b></font></code><br/>
+		Returns the posts that belong to the thread with the given id<br />
+		Parameter:
+		<ul>
+			<li>thread_id</li>
+		</ul>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/byThread?thread_id=1</b></font></code><br/>
 	</li>
 
 	<li>
 		<code><font color="blue" style="background-color:#e6e6e6"><b>/new</b></font></code><br/>
-		Creates post in specific thread with the given thread id and the given text
+		Creates post in specific thread with the given thread id and the given text<br />
 		Parameters:
 		<ul>
 			<li>thread_id</li>
 			<li>text</li>
 		</ul>
-		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://localhost:8443/posts/new?thread_id=0&text=Hello world</b></font></code><br/>
+		Example: <code><font color="blue" style="background-color:#e6e6e6"><b>https://readinghood.tk:8443/posts/new?thread_id=1&text=Hello world</b></font></code><br/>
 		Result:
 		<font color="green"><pre>
 
