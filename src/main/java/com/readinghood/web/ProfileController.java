@@ -141,4 +141,30 @@ public class ProfileController {
     }
 
 
+    /*
+      Returns the total votes from the posts of the user with the given id
+    */
+    @GetMapping(path = "/votes")
+    public @ResponseBody
+    String getVotes(@RequestParam Long profile_id) {
+
+        Profile profile = profileRepository.findById(profile_id);
+
+        if(profile == null){
+            return "Profile not found";
+        }
+
+        return String.valueOf(profile.getVotes());
+
+    }
+    
+    /*
+      Returns the data of the profiles with the given username
+    */
+    @GetMapping(path = "/searchUsername")
+    public @ResponseBody
+    Iterable<Profile> getAccountsByUsername(@RequestParam String username) {
+        return profileRepository.findByUsername(username);
+    }
+
 }
