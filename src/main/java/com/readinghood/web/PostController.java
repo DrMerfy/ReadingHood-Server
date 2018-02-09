@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.readinghood.repository.PostRepository;
+import com.readinghood.repository.ProfileRepository;
 import com.readinghood.repository.ThreadRepository;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +37,8 @@ public class PostController {
     private ThreadRepository threadRepository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private ProfileRepository profileRepository;
 
 
     /*
@@ -78,7 +82,11 @@ public class PostController {
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Profile upvoter = accountRepository.findByEmail(currentUserEmail).getProfile();
-
+        
+        if (upvoter.equals(post.getAuthor())){
+            return "You can't upvote your post";
+        }
+        
         if (upvoter.hasUpvoted(post)) {
             return "User already upvoted this post";
         }
@@ -107,6 +115,10 @@ public class PostController {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Profile downvoter = accountRepository.findByEmail(currentUserEmail).getProfile();
 
+        if (downvoter.equals(post.getAuthor())){
+            return "You can't downvote your post";
+        }
+        
         if (downvoter.hasDownvoted(post)) {
             return "User already downvoted this post";
         }
@@ -139,36 +151,50 @@ public class PostController {
 
     
     /*
-      Returns the posts created by the connected user
+      Returns the posts created by the profile with the given id
     */
     @GetMapping(path = "/created")
     public @ResponseBody
-    List<Post> getCreated() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
-        return user.getCreatedPosts();
+    List<Post> getCreated(@RequestParam Long profile_id) {
+        Profile profile = profileRepository.findById(profile_id);
+        List<Post> posts = profile.getCreatedPosts();
+        Collections.reverse(posts);
+        return posts;
     }
     
     /*
-      Returns the posts upvoted by the connected user
+      Returns the posts upvoted by the profile with the given id
     */
     @GetMapping(path = "/upvoted")
     public @ResponseBody
-    List<Post> getUpvoted() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
-        return user.getUpvotes();
+    List<Post> getUpvoted(@RequestParam Long profile_id) {        
+        Profile profile = profileRepository.findById(profile_id);
+        List<Post> posts = profile.getUpvotes();
+        Collections.reverse(posts);
+        return posts;
     }
     
     /*
-      Returns the posts downvoted by the connected user
+      Returns the posts downvoted by the profile with the given id
     */
     @GetMapping(path = "/downvoted")
     public @ResponseBody
-    List<Post> getDownvoted() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
-        return user.getDownvotes();
+    List<Post> getDownvoted(@RequestParam Long profile_id) {       
+        Profile profile = profileRepository.findById(profile_id);
+        List<Post> posts = profile.getDownvotes();
+        Collections.reverse(posts);
+        return posts;
+    }
+    
+    /*
+      Returns the posts that belong to the thread with the given id
+    */
+    @GetMapping(path = "/byThread")
+    public @ResponseBody
+    List<Post> getPostsOfThread(@RequestParam Long thread_id) {       
+        Thread thread = threadRepository.findById(thread_id);
+        List<Post> posts = thread.getPosts();
+        return posts;
     }
     
     
@@ -187,6 +213,7 @@ public class PostController {
         Profile author = accountRepository.findByEmail(currentUserEmail).getProfile();
 
         Post post = new Post(author, text);
+        post.setThread(thread);
         thread.addPost(post);
         author.addCreatedPost(post);
 
