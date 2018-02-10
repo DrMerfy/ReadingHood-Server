@@ -152,6 +152,10 @@ public class ThreadController {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Profile author = accountRepository.findByEmail(currentUserEmail).getProfile();
 
+        if (author.hasFavorited(thread)){
+            return "User has already favorited this thread";
+        }
+        
         author.addFavoriteThread(thread);
         thread.addFavorer(author);
 
