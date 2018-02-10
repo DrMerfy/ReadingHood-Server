@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.readinghood.repository.ThreadRepository;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -70,21 +71,34 @@ public class ThreadController {
      */
     @GetMapping(path = "/search")
     public @ResponseBody
-    Set<Thread> getThreads(@RequestParam String text) {
+    List<Thread> getThreads(@RequestParam String text) {
         Set<Thread> threads = new HashSet<>();
         List<Post> posts = postRepository.findByTextContaining(text);
 
         // add the threads that have a post that contains the text in them
         for (Post post : posts) {
             threads.add(post.getThread());
-            System.out.println(post.getThread());
         }
 
         // add the threads that contain the text in their title
         List<Thread> threadsWithTitle = threadRepository.findByTitleContaining(text);
         threads.addAll(threadsWithTitle);
+        
+        // Set to List
+        List<Thread> threadsList = new ArrayList<>();
+        threadsList.addAll(threads);
+        
+        // sort by views
+        Collections.sort(threadsList, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((Thread) o1).getViews() - ((Thread) o2).getViews();
+            }
+        });
+        Collections.reverse(threadsList);
+        
 
-        return threads;
+        return threadsList;
     }
 
     /*
