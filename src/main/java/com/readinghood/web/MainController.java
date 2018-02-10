@@ -46,7 +46,7 @@ public class MainController {
             @RequestParam(value = "surname", required = false) String surname,
             @RequestParam(value = "department", required = false) String department) {
 
-        if (accountRepository.findByEmail(email) == null) {
+        if (accountRepository.findByEmailIgnoreCase(email) == null) {
 
             String hashedPassword = passwordEncoder.encode(password);
 
