@@ -37,7 +37,7 @@ public class AccountController {
     @GetMapping(path = "/searchEmail")
     public @ResponseBody
     Account getAccountByEmail(@RequestParam String email) {
-        return accountRepository.findByEmail(email);
+        return accountRepository.findByEmailIgnoreCase(email);
     }
 
 
