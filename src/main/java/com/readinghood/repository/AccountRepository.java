@@ -19,5 +19,5 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     @Override
     List<Account> findAll();
     Account findByEmail(String email);
-    
+    Account findByEmailIgnoreCase(String email);
 }
