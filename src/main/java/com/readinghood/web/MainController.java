@@ -50,10 +50,7 @@ public class MainController {
 
             String hashedPassword = passwordEncoder.encode(password);
 
-            Account account = new Account();
-           
-            account.setEmail(email);
-            account.setPassword(hashedPassword);
+            Account account = new Account(email,hashedPassword);
             
             if (role != null) {
                 Role accountRole = Role.newRole(role);
@@ -88,7 +85,7 @@ public class MainController {
         byte[] encoded;
         try {
             encoded = Files.readAllBytes(Paths.get("api.html"));
-               html = new String(encoded);
+            html = new String(encoded);
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
