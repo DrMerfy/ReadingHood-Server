@@ -113,7 +113,7 @@ public class PostController {
         }
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile downvoter = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile downvoter = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         if (downvoter.equals(post.getAuthor())){
             return "You can't downvote your post";
@@ -210,7 +210,7 @@ public class PostController {
         }
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile author = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile author = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         Post post = new Post(author, text);
         post.setThread(thread);
