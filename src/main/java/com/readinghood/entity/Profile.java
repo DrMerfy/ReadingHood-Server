@@ -82,6 +82,15 @@ public class Profile {
         this.favoriteThreads = new ArrayList<>();
         //this.savedTags = new ArrayList<>();
     }
+	
+    public Profile(String name, String username, String surname, String department, Account account){
+	    
+	 this.setName(name);
+         this.setUsername(username);
+         this.setSurname(surname);
+         this.setDepartment(department);
+         this.setAccount(account);       
+    }
 
     public Long getId() {
         return id;
