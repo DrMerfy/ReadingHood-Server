@@ -129,7 +129,6 @@ public class Profile {
     public Date getDateOfBirth() {
 	return dateOfBirth;
     }
-
     public void setDateOfBirth(Date dateOfBirth) {
 	this.dateOfBirth = dateOfBirth;
     } 
@@ -202,7 +201,6 @@ public class Profile {
     public List<Tag> getSavedTags() {
 	return savedTags;
     }
-
     public void setSavedTags(List<Tag> savedTags) {
 	this.savedTags = savedTags;
     }
@@ -217,6 +215,10 @@ public class Profile {
 
     public boolean hasDownvoted(Post post) {
         return this.downvotes.contains(post);
+    }
+
+    public boolean hasFavorited(Thread thread) {
+        return this.favoriteThreads.contains(thread);
     }
 
     public int getVotes() {
