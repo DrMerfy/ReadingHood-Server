@@ -94,7 +94,7 @@ public class ProfileController {
     public @ResponseBody
     List<Thread> getFavorites() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile user = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
         return user.getFavoriteThreads();
     }
 
