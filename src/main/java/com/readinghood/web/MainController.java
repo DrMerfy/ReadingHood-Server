@@ -65,15 +65,8 @@ public class MainController {
                 account.setAccountRole(Role.USER);
             }
 
-            Profile profile = new Profile();
-            profile.setName(name);
-            profile.setUsername(username);
-            profile.setSurname(surname);
-            profile.setDepartment(department);
-            profile.setAccount(account);
-
+            Profile profile = new Profile(name,username,surname,department,account);
             account.setProfile(profile);
-
             accountRepository.save(account);
 
             return "OK";
