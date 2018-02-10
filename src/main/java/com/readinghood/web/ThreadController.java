@@ -150,7 +150,7 @@ public class ThreadController {
         }
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile author = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile author = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         if (author.hasFavorited(thread)){
             return "User has already favorited this thread";
@@ -193,7 +193,7 @@ public class ThreadController {
     public @ResponseBody
     List<Thread> getSameDepartment() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile user = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         String myDepartment = user.getDepartment();
         
@@ -240,7 +240,7 @@ public class ThreadController {
             @RequestParam(value = "tags", required = false) List<String> tags) {
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile author = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile author = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         Post post = new Post(author, text);
         Thread thread = new Thread(title, post);
