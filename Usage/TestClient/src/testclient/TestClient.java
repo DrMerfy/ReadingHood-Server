@@ -46,79 +46,108 @@ public class TestClient {
         try {
 
             // Authenticated Request Example
-            String url = "https://localhost:8443/accounts/all";
-            String email = "aaa";
-            String password = "aa";
+            String url = "https://readinghood.tk:8443/verify";
+            String email = "a@a.a";
+            String password = "a";
             String reqResponse = sendAuthenicatedRequest(url, email, password, "GET");
             System.out.println("Response from '" + url + "':\n" + reqResponse);
 
             // Simple Request Example
-            url = "https://localhost:8443/";
+            url = "https://readinghood.tk:8443/accounts/searchEmail?email=a@a.a";
             reqResponse = sendSimpleRequest(url, "GET");
             System.out.println("Response from '" + url + "':\n" + reqResponse);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            if (e.getMessage().equals("401")){
+                System.out.println("User does not exist");
+            } else {
+                e.printStackTrace();
+            }
         }
+        
     }
 
-    private static String sendAuthenicatedRequest(String link, String email, String password, String requestMethod) throws MalformedURLException, IOException {
+    private static String sendAuthenicatedRequest(String link, String email, String password, String requestMethod) throws IOException  {
 
-        System.setOut(noOutputStream); // Silence all outputs
+        int responseCode = -1;
+        
+        try {
 
-        String authString = email + ":" + password;
-        String authStringEncrypted = new String(Base64.getEncoder().encode(authString.getBytes()));
+            System.setOut(noOutputStream); // Silence all outputs
 
-        // Send request
-        URL obj = new URL(link);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-        con.setRequestMethod(requestMethod);
-        con.setRequestProperty("User-Agent", "RH-Client");
-        con.setRequestProperty("Authorization", "Basic " + authStringEncrypted);
+            String authString = email + ":" + password;
+            String authStringEncrypted = new String(Base64.getEncoder().encode(authString.getBytes()));
 
-        // Get request response
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            // Send request
+            URL obj = new URL(link);
+            HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+            con.setRequestMethod(requestMethod);
+            con.setRequestProperty("User-Agent", "RH-Client");
+            con.setRequestProperty("Authorization", "Basic " + authStringEncrypted);
+
+            responseCode = con.getResponseCode();
+            
+            // Get request response
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.setOut(originalStream); // Desilence all outputs 
+
+
+            // Print Response Code
+            //int responseCode = con.getResponseCode();
+            //System.out.println("Response Code : " + responseCode);
+            return response.toString();
+
+        } catch (IOException e) {
+            System.setOut(originalStream); // Desilence all outputs
+            
+            if (responseCode == 401){ // Bad credentials
+                throw new IOException("401");
+            }
+            
+            throw e;
         }
-        in.close();
-
-        System.setOut(originalStream); // Desilence all outputs   
-
-        // Print Response Code
-        //int responseCode = con.getResponseCode();
-        //System.out.println("Response Code : " + responseCode);
-        return response.toString();
 
     }
 
-    private static String sendSimpleRequest(String link, String requestMethod) throws MalformedURLException, IOException {
+    private static String sendSimpleRequest(String link, String requestMethod) throws IOException {
 
-        System.setOut(noOutputStream); // Silence all outputs
+        try {
 
-        // Send request
-        URL obj = new URL(link);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-        con.setRequestMethod(requestMethod);
-        con.setRequestProperty("User-Agent", "RH-Client");
+            System.setOut(noOutputStream); // Silence all outputs
 
-        // Get request response
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            // Send request
+            URL obj = new URL(link);
+            HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+            con.setRequestMethod(requestMethod);
+            con.setRequestProperty("User-Agent", "RH-Client");
+
+            // Get request response
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.setOut(originalStream); // Desilence all outputs   
+
+            // Print Response Code
+            //int responseCode = con.getResponseCode();
+            //System.out.println("Response Code : " + responseCode);
+            return response.toString();
+
+        } catch (IOException e) {
+            System.setOut(originalStream); // Desilence all outputs  
+            throw new IOException();
         }
-        in.close();
-
-        System.setOut(originalStream); // Desilence all outputs   
-
-        // Print Response Code
-        //int responseCode = con.getResponseCode();
-        //System.out.println("Response Code : " + responseCode);
-        return response.toString();
 
     }
 
