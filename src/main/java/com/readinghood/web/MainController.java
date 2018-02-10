@@ -51,7 +51,7 @@ public class MainController {
             String hashedPassword = passwordEncoder.encode(password);
 
             Account account = new Account();
-            account.setUsername(username);
+           
             account.setEmail(email);
             account.setPassword(hashedPassword);
             
@@ -67,6 +67,7 @@ public class MainController {
 
             Profile profile = new Profile();
             profile.setName(name);
+            profile.setUsername(username);
             profile.setSurname(surname);
             profile.setDepartment(department);
             profile.setAccount(account);
