@@ -107,7 +107,7 @@ public class ProfileController {
 
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile user = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         if(name.length() == 0){
             return "Name must have at least one character";
@@ -128,7 +128,7 @@ public class ProfileController {
 
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Profile user = accountRepository.findByEmail(currentUserEmail).getProfile();
+        Profile user = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
 
         if(surname.length() == 0){
             return "Name must have at least one character";
