@@ -237,7 +237,7 @@ public class ThreadController {
     @GetMapping(path = "/new")
     public @ResponseBody
     String addThread(@RequestParam String title, @RequestParam String text,
-            @RequestParam(value = "tags", required = false) List<String> tags) {
+            @RequestParam(value = "tags", required = false) Set<String> tags) {
 
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Profile author = accountRepository.findByEmailIgnoreCase(currentUserEmail).getProfile();
