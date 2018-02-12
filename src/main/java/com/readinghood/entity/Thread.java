@@ -38,6 +38,7 @@ public class Thread {
     
     @OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
+    @OrderBy("post_id ASC")
     private List<Post> posts;
     
 
